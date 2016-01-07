@@ -38,17 +38,21 @@ public class OrganizeFiles {
 
 	}
 
+	private void createOrValidateTargetFolder(Path folder) throws IOException {
+		if (!Files.exists(folder, LinkOption.NOFOLLOW_LINKS)) {
+			logger.info("Creating target folder '{}'", folder);
+			Files.createDirectory(folder, ATTR);
+		} else {
+			Validate.isTrue(Files.isDirectory(folder, LinkOption.NOFOLLOW_LINKS), "target must be a directory");
+		}
+	}
+
 	public void organize(Path source, Path target) throws IOException {
 		Validate.notNull(source, "the source couldn't be null");
 		Validate.notNull(target, "the target couldn't be null");
 		Validate.isTrue(Files.isDirectory(source, LinkOption.NOFOLLOW_LINKS), "the source must be a directory");
 
-		if (!Files.exists(target, LinkOption.NOFOLLOW_LINKS)) {
-			logger.info("Crating target folder '{}'", target);
-			Files.createDirectory(target, ATTR);
-		} else {
-			Validate.isTrue(Files.isDirectory(target, LinkOption.NOFOLLOW_LINKS), "the target must be a directory");
-		}
+		createOrValidateTargetFolder(target);
 
 		Files.walk(source, FileVisitOption.FOLLOW_LINKS).filter(p -> !Files.isDirectory(p, LinkOption.NOFOLLOW_LINKS))
 				.parallel().forEach((eachPath) -> {
@@ -59,10 +63,7 @@ public class OrganizeFiles {
 
 						Path targetPath = Paths.get(target.toString(), creationTime);
 
-						if (!Files.exists(targetPath, LinkOption.NOFOLLOW_LINKS)) {
-							logger.info("Crating target folder '{}'", targetPath);
-							Files.createDirectory(targetPath, ATTR);
-						}
+						createOrValidateTargetFolder(targetPath);
 
 						logger.info("Copying file {} to {}", eachPath.toString(), targetPath.toString());
 
@@ -92,7 +93,7 @@ public class OrganizeFiles {
 
 			new OrganizeFiles().organize(Paths.get(args[0]), Paths.get(args[1]));
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error("Error", e);
 		}
 	}
 }
