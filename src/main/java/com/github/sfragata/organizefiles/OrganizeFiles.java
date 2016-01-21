@@ -12,8 +12,10 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileAttribute;
 import java.nio.file.attribute.PosixFilePermission;
 import java.nio.file.attribute.PosixFilePermissions;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 import org.apache.commons.lang3.Validate;
@@ -31,10 +33,9 @@ public class OrganizeFiles {
 
 	}
 
-	private String formatDate(long millis) {
-
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		return dateFormat.format(new Date(millis));
+	private String formatDate(Instant instant) {
+		LocalDate date = instant.atZone(ZoneId.systemDefault()).toLocalDate();
+		return date.format(DateTimeFormatter.ISO_DATE);
 
 	}
 
@@ -59,7 +60,7 @@ public class OrganizeFiles {
 					try {
 						BasicFileAttributes attr = Files.readAttributes(eachPath, BasicFileAttributes.class);
 
-						String creationTime = formatDate(attr.creationTime().toMillis());
+						String creationTime = formatDate(attr.creationTime().toInstant());
 
 						Path targetPath = Paths.get(target.toString(), creationTime);
 
