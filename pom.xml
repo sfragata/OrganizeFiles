@@ -52,7 +52,7 @@
 				<configuration>
 					<programs>
 						<program>
-							<mainClass>com.github.sfragata.organizefiles.OrganizeFiles</mainClass>
+							<mainClass>com.github.sfragata.organizefiles.OrganizeFilesLauncher</mainClass>
 							<name>organizedfiles</name>
 						</program>
 					</programs>
