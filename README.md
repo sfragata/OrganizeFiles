@@ -1,5 +1,7 @@
 # OrganizeFiles
 
+[![Build Status](https://travis-ci.org/sfragata/OrganizeFiles.svg?branch=master)](https://travis-ci.org/sfragata/OrganizeFiles)
+
 Java application to organize all files from a source folder (organize by file name or file date attributes)
 
 #### Example
@@ -10,4 +12,3 @@ Java application to organize all files from a source folder (organize by file na
 it will create a target folder 2017-10-17
 
 
-[![Build Status](https://travis-ci.org/sfragata/OrganizeFiles.svg?branch=master)](https://travis-ci.org/sfragata/OrganizeFiles)
