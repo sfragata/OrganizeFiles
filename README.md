@@ -5,9 +5,9 @@
 Java application to organize all files from a source folder (organize by file name or file date attributes)
 
 ### Usage 
-
-/target/bin/organizedfiles (BY_FILE_NAME_WITH_DATE | BY_FILE_ATTRIBUTE_DATE) <source-path> <target-path>
-
+```
+/target/bin/organizedfiles (BY_FILE_NAME_WITH_DATE | BY_FILE_ATTRIBUTE_DATE) source-path target-path
+```
 
 #### Example
 
