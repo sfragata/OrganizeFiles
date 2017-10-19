@@ -26,7 +26,7 @@ public class OrganizeFilesLauncher {
 
             if (args.length != 3) {
                 logger.info(
-                    "Usage:\n\t organizefiles (BY_FILE_NAME_WITH_DATE | BY_FILE_ATTRIBUTE_DATE) <source-path> <target-path>");
+                    "Usage:\n\t organizedfiles (BY_FILE_NAME_WITH_DATE | BY_FILE_ATTRIBUTE_DATE) <source-path> <target-path>");
                 System.exit(1);
             }
 
