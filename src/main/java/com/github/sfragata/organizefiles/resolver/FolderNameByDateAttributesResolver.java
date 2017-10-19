@@ -12,7 +12,7 @@ import java.util.function.Function;
 
 import com.github.sfragata.organizefiles.resolver.exception.UnresolvedFolderNameException;
 
-public class FolderNameByDateAttributesResolver
+class FolderNameByDateAttributesResolver
     extends AbstractFolderNameResolver {
 
     public FolderNameByDateAttributesResolver() {
@@ -24,10 +24,10 @@ public class FolderNameByDateAttributesResolver
             BasicFileAttributes attr;
             try {
                 attr = Files.readAttributes(path, BasicFileAttributes.class);
-            } catch (final IOException e) {
+            } catch (final IOException ioException) {
                 throw new UnresolvedFolderNameException(
                     String.format("Could not read the attributes of the file %s", path.toString()),
-                    e);
+                    ioException);
             }
 
             final Instant instant = attr.creationTime().toInstant();
