@@ -60,17 +60,17 @@
 							<id>organizedfiles</id>
 						</program>
 					</programs>
-					<executions>
-						<execution>
-							<phase>package</phase>
-							<goals>
-								<goal>assemble</goal>
-							</goals>
-						</execution>
-					</executions>
 					<repositoryLayout>flat</repositoryLayout>
 					<repositoryName>lib</repositoryName>
 				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>assemble</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

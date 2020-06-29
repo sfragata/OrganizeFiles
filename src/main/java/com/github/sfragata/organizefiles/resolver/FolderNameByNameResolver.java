@@ -34,11 +34,11 @@ class FolderNameByNameResolver
     private void validateFileName(
         final Path fileName) {
 
-        final String fileNameWithoutExtention = removeExtension(fileName);
+        final String fileNameWithoutExtension = removeExtension(fileName);
 
-        if (fileNameWithoutExtention.length() < MINIMUM_FILE_LENGTH) {
+        if (fileNameWithoutExtension.length() < MINIMUM_FILE_LENGTH) {
             throw new IllegalArgumentException(
-                String.format("File name '%s' does not match to the date format YYYMMDD as prefix",
+                String.format("File name '%s' does not match to the date format YYYYMMDD as prefix",
                     fileName.toString()));
         }
     }
