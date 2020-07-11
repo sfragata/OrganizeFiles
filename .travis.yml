@@ -3,6 +3,9 @@ jdk:
   - openjdk11
   - openjdk13
 script:
-  - export extracted_java_version=$(javac -version | sed 's/javac //g' | awk -F'.' '{print $1}')
+  - which java
+  - which javac
+  - javac -version
+  - export extracted_java_version=`javac -version | sed 's/javac //g' | awk -F'.' '{print $1}'`
   - echo "java version: $extracted_java_version"
   - mvn -B -Djava.version=${extracted_java_version} -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn clean verify
