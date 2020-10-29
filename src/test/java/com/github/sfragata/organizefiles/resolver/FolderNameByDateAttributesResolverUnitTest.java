@@ -40,7 +40,7 @@ public class FolderNameByDateAttributesResolverUnitTest {
         final LocalDate date = instant.atZone(ZoneId.systemDefault()).toLocalDate();
         final String dateString = date.format(DateTimeFormatter.ISO_DATE);
 
-        final String result = this.folderNameResolutionType.getFolderNameResolver().resolve(sourceFile);
+        final String result = this.folderNameResolutionType.getResolver().resolve(sourceFile);
 
         assertEquals(dateString, result);
 
@@ -59,7 +59,7 @@ public class FolderNameByDateAttributesResolverUnitTest {
         when(fileSystem.provider()).thenReturn(fileSystemProvider);
         when(fileSystemProvider.readAttributes(any(Path.class), any(Class.class))).thenThrow(new IOException());
 
-        this.folderNameResolutionType.getFolderNameResolver().resolve(sourceFile);
+        this.folderNameResolutionType.getResolver().resolve(sourceFile);
 
     }
 }

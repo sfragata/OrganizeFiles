@@ -8,13 +8,13 @@ public enum FolderNameResolutionType {
         BY_FILE_ATTRIBUTE_DATE(new FolderNameByDateAttributesResolver()),
         BY_FILE_NAME_WITH_DATE(new FolderNameByNameResolver());
 
-    private FolderNameResolver folderNameResolver;
+    private final FolderNameResolver folderNameResolver;
 
-    private FolderNameResolutionType(final FolderNameResolver pFolderNameResolver) {
+    FolderNameResolutionType(final FolderNameResolver pFolderNameResolver) {
         this.folderNameResolver = pFolderNameResolver;
     }
 
-    public FolderNameResolver getFolderNameResolver() {
+    public FolderNameResolver getResolver() {
 
         return this.folderNameResolver;
     }

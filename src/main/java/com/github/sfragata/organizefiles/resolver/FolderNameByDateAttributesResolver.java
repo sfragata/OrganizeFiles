@@ -1,5 +1,7 @@
 package com.github.sfragata.organizefiles.resolver;
 
+import com.github.sfragata.organizefiles.resolver.exception.UnresolvedFolderNameException;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -10,24 +12,25 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.function.Function;
 
-import com.github.sfragata.organizefiles.resolver.exception.UnresolvedFolderNameException;
-
 class FolderNameByDateAttributesResolver
-    extends AbstractFolderNameResolver {
+        implements FolderNameResolver {
 
     public FolderNameByDateAttributesResolver() {
         super();
 
-        final Function<Path, String> function = (
-            final Path path) -> {
+    }
 
-            BasicFileAttributes attr;
+    @Override
+    public Function<Path, String> getFunction() {
+        return (final Path path) -> {
+
+            final BasicFileAttributes attr;
             try {
                 attr = Files.readAttributes(path, BasicFileAttributes.class);
             } catch (final IOException ioException) {
                 throw new UnresolvedFolderNameException(
-                    String.format("Could not read the attributes of the file %s", path.toString()),
-                    ioException);
+                        String.format("Could not read the attributes of the file %s", path.toString()),
+                        ioException);
             }
 
             final Instant instant = attr.creationTime().toInstant();
@@ -35,8 +38,5 @@ class FolderNameByDateAttributesResolver
             final LocalDate date = instant.atZone(ZoneId.systemDefault()).toLocalDate();
             return date.format(DateTimeFormatter.ISO_DATE);
         };
-
-        setFunction(function);
     }
-
 }
