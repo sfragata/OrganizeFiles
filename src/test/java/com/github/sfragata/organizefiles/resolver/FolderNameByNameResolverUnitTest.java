@@ -20,7 +20,7 @@ public class FolderNameByNameResolverUnitTest {
     public void givenValidNamePathWhenResolveThenSuccess() {
 
         final String result =
-            this.folderNameResolutionType.getFolderNameResolver().resolve(Paths.get(FILE_NAME_WITH_DATE));
+            this.folderNameResolutionType.getResolver().resolve(Paths.get(FILE_NAME_WITH_DATE));
 
         assertEquals(EXPECTED_FOLDER_RESULT, result);
     }
@@ -28,14 +28,14 @@ public class FolderNameByNameResolverUnitTest {
     @Test(expected = IllegalArgumentException.class)
     public void givenInvalidNamePathWhenResolveThenThrowIllegalArgumentException() {
 
-        this.folderNameResolutionType.getFolderNameResolver().resolve(Paths.get(INVALID_FILE_NAME_WITH_DATE));
+        this.folderNameResolutionType.getResolver().resolve(Paths.get(INVALID_FILE_NAME_WITH_DATE));
 
     }
 
     @Test(expected = NullPointerException.class)
     public void givenNullPathWhenResolveThenThrowNullPointerException() {
 
-        this.folderNameResolutionType.getFolderNameResolver().resolve(null);
+        this.folderNameResolutionType.getResolver().resolve(null);
 
     }
 

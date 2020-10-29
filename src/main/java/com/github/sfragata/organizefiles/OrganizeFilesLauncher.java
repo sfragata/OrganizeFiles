@@ -1,17 +1,16 @@
 package com.github.sfragata.organizefiles;
 
+import com.github.sfragata.organizefiles.resolver.FolderNameResolutionType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.github.sfragata.organizefiles.resolver.FolderNameResolutionType;
-
 public class OrganizeFilesLauncher {
 
-    private static Logger logger = LoggerFactory.getLogger(OrganizeFilesLauncher.class);
+    private static final Logger logger = LoggerFactory.getLogger(OrganizeFilesLauncher.class);
 
     private OrganizeFilesLauncher(final String resolveType, final Path source, final Path target) throws IOException {
         final OrganizeFiles organizeFiles = new OrganizeFiles();
@@ -20,13 +19,13 @@ public class OrganizeFilesLauncher {
 
     @SuppressWarnings("unused")
     public static void main(
-        final String[] args) {
+            final String[] args) {
 
         try {
 
             if (args.length != 3) {
                 logger.info(
-                    "Usage:\n\t organizedfiles (BY_FILE_NAME_WITH_DATE | BY_FILE_ATTRIBUTE_DATE) <source-path> <target-path>");
+                        "Usage:\n\t organizedfiles (BY_FILE_NAME_WITH_DATE | BY_FILE_ATTRIBUTE_DATE) <source-path> <target-path>");
                 System.exit(1);
             }
 
